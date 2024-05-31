@@ -12,10 +12,8 @@ public class Main {
      window.setResizable(false);
      window.setTitle("Super Cool RPG :))");
 
-
      GamePanel gamePanel = new GamePanel();
      window.add(gamePanel);
-
      window.pack();
 
      window.setLocationRelativeTo(null);

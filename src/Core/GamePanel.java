@@ -1,6 +1,8 @@
 package Core;
 
 import Characters.Player;
+import Tiles.Tile;
+import Tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,15 +23,10 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     Player player= new Player(this,keyH);
+    TileManager tile=new TileManager(this);
 
     //FPS
     int FPS = 60;
-
-    //player position
-    int playerX = 100;
-    int playerY = 100;
-
-    int playerspeed=4;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
@@ -80,6 +77,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        tile.draw(g2);
         player.draw(g2);
+       g2.dispose();
+
     }
 }
