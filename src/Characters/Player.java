@@ -50,7 +50,7 @@ public class Player extends Character{
             }
 
             sproteCounter++;
-            if (sproteCounter > 20) {
+            if (sproteCounter > 12) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
                 } else if (spriteNum == 2) {
