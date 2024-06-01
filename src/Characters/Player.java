@@ -2,82 +2,96 @@ package Characters;
 
 import Core.GamePanel;
 import Core.KeyHandler;
+import Tiles.TileManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player extends Character{
+public class Player extends Character {
 
     GamePanel gamePanel;
     KeyHandler keyH;
+    public int screenX;
+    public int screenY;
 
+    public Player(GamePanel gamePanel, KeyHandler keyH) {
+        this.gamePanel = gamePanel;
+        this.keyH = keyH;
 
-    public  Player(GamePanel gamePanel, KeyHandler keyH){
-        this.gamePanel=gamePanel;
-        this.keyH=keyH;
+        screenX= gamePanel.ScreenWidth/2-(gamePanel.tileSize/2);
+        screenY= gamePanel.ScreenHeight/2-(gamePanel.tileSize/2);
+
+        soidArea = new Rectangle(8, 16, 32, 32);
+
         setDefaultValues();
         getPlayerImage();
     }
 
-    public  void setDefaultValues(){
-        x=100;
-        y=100;
-        speed=4;
-        direction="up";
+
+    public void setDefaultValues() {
+        worldX = 500;
+        worldY = 500;
+        speed = 4;
+        direction = "up";
     }
 
-    public void update(){
-        if(keyH.upPressed ||keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-
+    public void update() {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            int dx = 0;
+            int dy = 0;
 
             if (keyH.upPressed) {
+                dy = -1;
                 direction = "up";
-                y = y - speed;
             }
             if (keyH.downPressed) {
+                dy = 1;
                 direction = "down";
-                y = y + speed;
-            }
-            if (keyH.rightPressed) {
-                direction = "right";
-                x = x + speed;
             }
             if (keyH.leftPressed) {
+                dx = -1;
                 direction = "left";
-                x = x - speed;
+            }
+            if (keyH.rightPressed) {
+                dx = 1;
+                direction = "right";
             }
 
-            sproteCounter++;
-            if (sproteCounter > 12) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                sproteCounter = 0;
+            // Normalize the speed for diagonal movement
+            if (dx != 0 && dy != 0) {
+                dx *= Math.sqrt(2) / 2;
+                dy *= Math.sqrt(2) / 2;
+            }
+
+            worldX += dx * speed;
+            worldY += dy * speed;
+
+            collision = false;
+            gamePanel.collision.checkTile(this);
+
+            spriteCounter++;
+            if (spriteCounter > 12) {
+                spriteNum = (spriteNum == 1) ? 2 : 1;
+                spriteCounter = 0;
             }
         }
-
     }
 
-
-
-    public void getPlayerImage(){
-        try  {
-            up1= ImageIO.read(getClass().getResourceAsStream("/player/player_up1.png"));
-            up2= ImageIO.read(getClass().getResourceAsStream("/player/player_up2.png"));
-            down1= ImageIO.read(getClass().getResourceAsStream("/player/player_down1.png"));
-            down2= ImageIO.read(getClass().getResourceAsStream("/player/player_down2.png"));
-            right1= ImageIO.read(getClass().getResourceAsStream("/player/player_right1.png"));
-            right2= ImageIO.read(getClass().getResourceAsStream("/player/player_right2.png"));
-            left1= ImageIO.read(getClass().getResourceAsStream("/player/player_left1.png"));
-            left2= ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png"));
-    }
-    catch (IOException e){
+    public void getPlayerImage() {
+        try {
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/player_up1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/player/player_up2.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/player/player_down1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/player/player_down2.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/player/player_right1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/player/player_right2.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/player/player_left1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png"));
+        } catch (IOException e) {
             e.printStackTrace();
-    }
+        }
     }
 
     public void draw(Graphics2D g2){
@@ -87,7 +101,7 @@ public class Player extends Character{
         switch (direction){
             case "up":
                 if(spriteNum==1){
-                image = up1;
+                    image = up1;
                 }
                 if(spriteNum==2){
                     image=up2;
@@ -118,9 +132,12 @@ public class Player extends Character{
                 }
                 break;
         }
-        g2.drawImage(image,x,y, gamePanel.tileSize,gamePanel.tileSize,null);
+        g2.drawImage(image,screenX,screenY, gamePanel.tileSize,gamePanel.tileSize,null);
 
 
     }
-}
 
+    public void lavaDeath() {
+        // Implement lavaDeath method if needed
+    }
+}

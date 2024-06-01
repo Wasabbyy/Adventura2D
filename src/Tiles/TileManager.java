@@ -14,24 +14,39 @@ public class TileManager {
 
     GamePanel gamePanel;
     Tile[] tile;
-
     int[][] mapTileNumber;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        tile = new Tile[10];
-        getTileImage();
-        mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
-        loadMap();
+        tile = new Tile[6]; // Adjust size based on the number of tile types
+        loadTileImages();
+        mapTileNumber = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        loadMap("/map/worldmap.txt");
     }
 
-    public void getTileImage() {
+    private void loadTileImages() {
         try {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
+
+            tile[2] = new Tile();
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
+
+            tile[4] = new Tile();
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
+
+
+
+            // Load other tile images similarly
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,32 +54,36 @@ public class TileManager {
 
     public void draw(Graphics2D g2) {
         int tileSize = gamePanel.tileSize;
+        int playerWorldX = gamePanel.player.worldX;
+        int playerWorldY = gamePanel.player.worldY;
+        int playerScreenX = gamePanel.player.screenX;
+        int playerScreenY = gamePanel.player.screenY;
 
-        for (int row = 0; row < gamePanel.maxScreenRow; row++) {
-            for (int col = 0; col < gamePanel.maxScreenCol; col++) {
+        for (int col = 0; col < gamePanel.maxWorldCol; col++) {
+            for (int row = 0; row < gamePanel.maxWorldRow; row++) {
                 int texture = mapTileNumber[col][row];
-                int x = col * tileSize;
-                int y = row * tileSize;
-                g2.drawImage(tile[texture].image, x, y, tileSize, tileSize, null);
+                int worldX = col * tileSize;
+                int worldY = row * tileSize;
+
+                int screenX = worldX - playerWorldX + playerScreenX;
+                int screenY = worldY - playerWorldY + playerScreenY;
+
+                g2.drawImage(tile[texture].image, screenX, screenY, tileSize, tileSize, null);
             }
         }
     }
 
-    public void loadMap() {
-        try {
-            InputStream is = getClass().getResourceAsStream("/map/map1.txt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+    private void loadMap(String filename) {
+        try (InputStream is = getClass().getResourceAsStream(filename);
+             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
-            for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+            for (int row = 0; row < gamePanel.maxWorldRow; row++) {
                 String line = br.readLine();
                 String[] numbers = line.split(" ");
-                for (int col = 0; col < gamePanel.maxScreenCol; col++) {
-                    int num = Integer.parseInt(numbers[col]);
-                    mapTileNumber[col][row] = num;
+                for (int col = 0; col < gamePanel.maxWorldCol; col++) {
+                    mapTileNumber[col][row] = Integer.parseInt(numbers[col]);
                 }
             }
-
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
