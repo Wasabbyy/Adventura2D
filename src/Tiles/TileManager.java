@@ -27,28 +27,27 @@ public class TileManager {
     private void loadTileImages() {
         try {
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/floor.png"));
 
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
-            tile[1].dangerousCollision = true;
-            tile[1].collision = true;
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lavafloor.png"));
+
 
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
 
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
             tile[3].dangerousCollision = true;
             tile[3].collision = true;
 
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png"));
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
+            tile[4].dangerousCollision = true;
+            tile[4].collision = true;
 
             tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/lava.png"));
-            tile[5].dangerousCollision = true;
-            tile[5].collision = true;
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/floor.png"));
 
 
             // Load other tile images similarly
