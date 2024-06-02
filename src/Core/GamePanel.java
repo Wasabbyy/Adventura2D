@@ -4,8 +4,11 @@ import Characters.Player;
 import Tiles.Tile;
 import Tiles.TileManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -19,19 +22,21 @@ public class GamePanel extends JPanel implements Runnable {
 
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = maxWorldCol*tileSize;
-    public final int worldHeight = maxWorldRow*tileSize;
+
+    public boolean endGame = false;
+    public final int worldWidth = maxWorldCol * tileSize;
+    public final int worldHeight = maxWorldRow * tileSize;
+
+    BufferedImage endScreen;
 
     Thread gameThread;
 
     KeyHandler keyH = new KeyHandler();
     public Collision collisionChecker = new Collision(this);
-
     public DangerousCollision dangerousCollision = new DangerousCollision(this);
 
-
-    public Player player= new Player(this,keyH);
-    public TileManager tileManager =new TileManager(this);
+    public Player player = new Player(this, keyH);
+    public TileManager tileManager = new TileManager(this);
 
     //FPS
     int FPS = 60;
@@ -51,43 +56,54 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
+        double drawInterval = 1000000000 / FPS; // 0.2 sec cca
+        double nextDrawTime = System.nanoTime() + drawInterval; //Will do that it wont draw that fast, basically takes
 
-        double drawInterval = 1000000000/FPS; // 0.2 sec cca
-        double nextDrawTime = System.nanoTime()+drawInterval; //Will do that it wont draw that fast, basically takes
-
-
-        while (gameThread != null) {
-
+        while (gameThread != null && player.hearth != 0) {
             update();
             repaint();
 
-            try{
-                double remainingTime = nextDrawTime- System.nanoTime();
-                remainingTime= remainingTime/1000000;
-                if(remainingTime<0){
-                    remainingTime=0;
+            try {
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime / 1000000;
+                if (remainingTime < 0) {
+                    remainingTime = 0;
                 }
                 Thread.sleep((long) remainingTime);
-                nextDrawTime+=drawInterval;
+                nextDrawTime += drawInterval;
 
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
+        endGame = true;
+        repaint(); // Trigger a final repaint to display the end game screen
     }
-    public void update(){
 
+    public void setEndGame(Graphics2D g2) {
+        try {
+            endScreen = ImageIO.read(getClass().getResourceAsStream("/screens/end.png"));
+            g2.drawImage(endScreen, 0, 0, ScreenWidth, ScreenHeight, null); // Draw the end screen image correctly
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update() {
         player.update();
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         tileManager.draw(g2);
         player.draw(g2);
-       g2.dispose();
 
+        if (endGame) {
+            setEndGame(g2);
+        }
+
+        g2.dispose();
     }
 }

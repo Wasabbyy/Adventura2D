@@ -17,7 +17,7 @@ public class Player extends Character {
     public int screenX;
     public int screenY;
     private long lastDamageTime; // Variable to track the last damage time
-    private static final long DAMAGE_DELAY = 1000; // 1 second delay in milliseconds
+    private static final long DAMAGE_DELAY = 500; // 0.5 second delay in milliseconds
 
     public Player(GamePanel gamePanel, KeyHandler keyH) {
         this.gamePanel = gamePanel;
@@ -37,12 +37,13 @@ public class Player extends Character {
         worldY = 1000;
         speed = 4;
         direction = "up";
-        hearth = 3;
+        hearth = 4;
         lastDamageTime = System.currentTimeMillis(); // Initialize the damage time
     }
 
     public void update() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+
             int dx = 0, dy = 0;
 
             if (keyH.upPressed) direction = "up";
@@ -58,10 +59,18 @@ public class Player extends Character {
 
             if (!collisionOn) {
                 switch (direction) {
-                    case "up": dy = -1; break;
-                    case "down": dy = 1; break;
-                    case "left": dx = -1; break;
-                    case "right": dx = 1; break;
+                    case "up":
+                        dy = -1;
+                        break;
+                    case "down":
+                        dy = 1;
+                        break;
+                    case "left":
+                        dx = -1;
+                        break;
+                    case "right":
+                        dx = 1;
+                        break;
                 }
                 if (dx != 0 && dy != 0) {
                     dx *= Math.sqrt(2) / 2;
@@ -129,12 +138,15 @@ public class Player extends Character {
         }
         if (hearth == 1) {
             g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
             g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
             g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
         }
         if (hearth == 0) {
-            // handle the case where the player has no health left
+            g2.drawImage(healthBlank, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
         }
     }
 
