@@ -16,5 +16,7 @@ public class Character {
     public int spriteNum = 1;
 
     public Rectangle soidArea;
-    public boolean collision = false;
+    public boolean collisionOn=false;
+    public boolean dangerousCollisionOn=false;
+
 }
