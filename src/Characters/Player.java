@@ -16,6 +16,8 @@ public class Player extends Character {
     private final KeyHandler keyH;
     public int screenX;
     public int screenY;
+    private long lastDamageTime; // Variable to track the last damage time
+    private static final long DAMAGE_DELAY = 1000; // 1 second delay in milliseconds
 
     public Player(GamePanel gamePanel, KeyHandler keyH) {
         this.gamePanel = gamePanel;
@@ -23,7 +25,6 @@ public class Player extends Character {
 
         screenX = gamePanel.ScreenWidth / 2 - gamePanel.tileSize / 2;
         screenY = gamePanel.ScreenHeight / 2 - gamePanel.tileSize / 2;
-
 
         soidArea = new Rectangle(8, 16, 32, 32);
 
@@ -36,6 +37,8 @@ public class Player extends Character {
         worldY = 1000;
         speed = 4;
         direction = "up";
+        hearth = 3;
+        lastDamageTime = System.currentTimeMillis(); // Initialize the damage time
     }
 
     public void update() {
@@ -51,6 +54,7 @@ public class Player extends Character {
             dangerousCollisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
             gamePanel.dangerousCollision.checkTile(this);
+            lavaDamage();
 
             if (!collisionOn) {
                 switch (direction) {
@@ -88,6 +92,7 @@ public class Player extends Character {
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png"));
 
             health = ImageIO.read(getClass().getResourceAsStream("/player/heart.png"));
+            healthBlank = ImageIO.read(getClass().getResourceAsStream("/player/heart_blank.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,13 +108,46 @@ public class Player extends Character {
         };
 
         g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
-        g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        g2.drawImage(health, 3 * gamePanel.tileSize,0, gamePanel.tileSize, gamePanel.tileSize, null);
+
+        if (hearth == 4) {
+            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        }
+        if (hearth == 3) {
+            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        }
+        if (hearth == 2) {
+            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        }
+        if (hearth == 1) {
+            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        }
+        if (hearth == 0) {
+            // handle the case where the player has no health left
+        }
     }
 
-    public void lavaDeath() {
-        // Implement lavaDeath method if needed
+    public void lavaDamage() {
+        long currentTime = System.currentTimeMillis();
+        if (dangerousCollisionOn) {
+            if (currentTime - lastDamageTime >= DAMAGE_DELAY) {
+                hearth -= 1;
+                lastDamageTime = currentTime; // Update the last damage time
+            }
+        } else {
+            // Update the lastDamageTime to the current time when the player leaves the lava
+            lastDamageTime = currentTime;
+        }
     }
 }

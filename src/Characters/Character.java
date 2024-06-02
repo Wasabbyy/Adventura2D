@@ -8,7 +8,7 @@ public class Character {
     public int worldY;
     public int speed;
 
-    public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2, health;
+    public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2, health,healthBlank;
 
     public String direction;
 
@@ -18,5 +18,7 @@ public class Character {
     public Rectangle soidArea;
     public boolean collisionOn=false;
     public boolean dangerousCollisionOn=false;
+
+    public int hearth;
 
 }
