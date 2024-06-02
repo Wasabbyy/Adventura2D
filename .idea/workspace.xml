@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="Generating map">
-      <change afterPath="$PROJECT_DIR$/graphic/tiles/floor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphic/tiles/lavafloor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/tiles/water.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphic/tiles/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/map/worldmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/map/worldmap.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tiles/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/TileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,6 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -88,7 +88,7 @@
       <workItem from="1717228638826" duration="32000" />
       <workItem from="1717231807436" duration="3280000" />
       <workItem from="1717247511168" duration="98000" />
-      <workItem from="1717254833305" duration="18449000" />
+      <workItem from="1717254833305" duration="19539000" />
     </task>
     <task id="LOCAL-00001" summary="Filip je noob">
       <option name="closed" value="true" />
@@ -186,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717320349165</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Generating map">
+      <option name="closed" value="true" />
+      <created>1717321384393</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1717321384393</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

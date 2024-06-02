@@ -28,8 +28,8 @@ public class Player extends Character {
     }
 
     public void setDefaultValues() {
-        worldX = 500;
-        worldY = 600;
+        worldX = 1130;
+        worldY = 1000;
         speed = 4;
         direction = "up";
     }
