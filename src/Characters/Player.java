@@ -2,9 +2,12 @@ package Characters;
 
 import Core.GamePanel;
 import Core.KeyHandler;
+
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Player extends Character {
@@ -20,6 +23,7 @@ public class Player extends Character {
 
         screenX = gamePanel.ScreenWidth / 2 - gamePanel.tileSize / 2;
         screenY = gamePanel.ScreenHeight / 2 - gamePanel.tileSize / 2;
+
 
         soidArea = new Rectangle(8, 16, 32, 32);
 
@@ -82,6 +86,8 @@ public class Player extends Character {
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/player_right2.png"));
             left1 = ImageIO.read(getClass().getResourceAsStream("/player/player_left1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png"));
+
+            health = ImageIO.read(getClass().getResourceAsStream("/player/heart.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,6 +103,10 @@ public class Player extends Character {
         };
 
         g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+        g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        g2.drawImage(health, 3 * gamePanel.tileSize,0, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 
     public void lavaDeath() {
