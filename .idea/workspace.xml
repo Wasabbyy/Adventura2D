@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="Setting up the game loop">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/map/lada1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/map/lada2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/player/hearth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/player/hearthempty.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/player/hearthhalf.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphic/map/worldmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/map/worldmap.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/heart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/heart_blank.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Characters/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Characters/Health.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Characters/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/TileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,13 +38,16 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2h9bRh7Q4s5SmVf1oNg5U6QhxtH" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -78,7 +89,8 @@
       <workItem from="1717228638826" duration="32000" />
       <workItem from="1717231807436" duration="3280000" />
       <workItem from="1717338437570" duration="2626000" />
-      <workItem from="1717355672119" duration="2282000" />
+      <workItem from="1717355672119" duration="6382000" />
+      <workItem from="1717402336146" duration="3108000" />
     </task>
     <task id="LOCAL-00001" summary="Filip je noob">
       <option name="closed" value="true" />
@@ -160,13 +172,22 @@
       <option name="project" value="LOCAL" />
       <updated>1717234697456</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Setting up the game loop">
+      <option name="closed" value="true" />
+      <created>1717360150362</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1717360150362</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Filip je noob" />
     <MESSAGE value="Setting up the game loop" />
     <option name="LAST_COMMIT_MESSAGE" value="Setting up the game loop" />

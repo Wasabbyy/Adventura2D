@@ -37,7 +37,7 @@ public class Player extends Character {
         worldY = 1000;
         speed = 4;
         direction = "up";
-        hearth = 4;
+        hearth = 6;
         lastDamageTime = System.currentTimeMillis(); // Initialize the damage time
     }
 
@@ -100,8 +100,9 @@ public class Player extends Character {
             left1 = ImageIO.read(getClass().getResourceAsStream("/player/player_left1.png"));
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left2.png"));
 
-            health = ImageIO.read(getClass().getResourceAsStream("/player/heart.png"));
-            healthBlank = ImageIO.read(getClass().getResourceAsStream("/player/heart_blank.png"));
+            health = ImageIO.read(getClass().getResourceAsStream("/player/hearth.png"));
+            healthBlank = ImageIO.read(getClass().getResourceAsStream("/player/hearthempty.png"));
+            healthHalf = ImageIO.read(getClass().getResourceAsStream("/player/hearthhalf.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,37 +118,7 @@ public class Player extends Character {
         };
 
         g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
-
-        if (hearth == 4) {
-            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        }
-        if (hearth == 3) {
-            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        }
-        if (hearth == 2) {
-            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(health, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        }
-        if (hearth == 1) {
-            g2.drawImage(health, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        }
-        if (hearth == 0) {
-            g2.drawImage(healthBlank, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 1 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-            g2.drawImage(healthBlank, 3 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        }
+        drawHearth(g2);
     }
 
     public void lavaDamage() {
@@ -161,5 +132,24 @@ public class Player extends Character {
             // Update the lastDamageTime to the current time when the player leaves the lava
             lastDamageTime = currentTime;
         }
+    }
+    public void drawHearth(Graphics2D g2){
+
+        for (int i=0; i<hearth; i++){
+            if (hearth % 2 == 1){
+                if (i+1 == hearth) {
+                    g2.drawImage(healthHalf, i / 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+                }
+                else {
+                    g2.drawImage(health, i / 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+                }
+
+            }
+            else {
+                g2.drawImage(health, i/2 * gamePanel.tileSize,0, gamePanel.tileSize, gamePanel.tileSize, null);
+                i++;
+            }
+        }
+
     }
 }

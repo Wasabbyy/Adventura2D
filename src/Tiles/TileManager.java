@@ -21,7 +21,7 @@ public class TileManager {
         tile = new Tile[6]; // Adjust size based on the number of tile types
         loadTileImages();
         mapTileNumber = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
-        loadMap("/map/worldmap.txt");
+        loadMap("/map/lada2.txt");
     }
 
     private void loadTileImages() {
