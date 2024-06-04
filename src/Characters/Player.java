@@ -12,8 +12,11 @@ import java.io.IOException;
 
 public class Player extends Character {
 
-    int hasKey=0;
+
     public Inventory inventory;
+    private long lastInventoryTime; // Variable to track the last time inventory was shown
+    private static final long INVENTORY_COOLDOWN = 500; // 0.5 second cooldown in milliseconds
+
     private final GamePanel gamePanel;
     private final KeyHandler keyH;
     public int screenX;
@@ -49,23 +52,26 @@ public class Player extends Character {
     }
 
     public void update() {
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+        long currentTime = System.currentTimeMillis();
+        boolean inventoryPressedWithCooldown = keyH.inventoryPressed && (currentTime - lastInventoryTime >= INVENTORY_COOLDOWN);
 
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || inventoryPressedWithCooldown) {
             int dx = 0, dy = 0;
 
             if (keyH.upPressed) direction = "up";
             if (keyH.downPressed) direction = "down";
             if (keyH.leftPressed) direction = "left";
             if (keyH.rightPressed) direction = "right";
-            if (keyH.inventoryPressed) direction = "inventory";
+            if (inventoryPressedWithCooldown) direction = "inventory";
 
             collisionOn = false;
             dangerousCollisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
             gamePanel.dangerousCollision.checkTile(this);
-            int objIndex= gamePanel.collisionChecker.checkObject(this,true);
+            int objIndex = gamePanel.collisionChecker.checkObject(this, true);
             pickUp(objIndex);
             lavaDamage();
+
 
             if (!collisionOn) {
                 switch (direction) {
@@ -83,6 +89,8 @@ public class Player extends Character {
                         break;
                     case "inventory":
                         inventory.listOfItems();
+                        lastInventoryTime = currentTime; // Update the last inventory time
+                        direction="down";
                         break;
                 }
                 if (dx != 0 && dy != 0) {
@@ -101,6 +109,7 @@ public class Player extends Character {
             }
         }
     }
+
 
     private void getPlayerImage() {
         try {
@@ -173,10 +182,7 @@ public class Player extends Character {
             switch (objectName){
                 case"Key":
                     inventory.addItems("Key");
-                    hasKey++;
                     gamePanel.obj[i]=null;
-                    System.out.println("Key:"+hasKey);
-                    inventory.listOfItems();
                     break;
             }
         }

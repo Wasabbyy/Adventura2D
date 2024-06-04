@@ -17,6 +17,7 @@ public class Inventory {
     }
     public String listOfItems(){
         for (String item : items){
+
             System.out.println(item);
         }
         return"";
