@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="Setting up the game loop">
-      <change afterPath="$PROJECT_DIR$/graphic/map/lada1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphic/map/lada2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphic/player/hearth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphic/player/hearthempty.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphic/player/hearthhalf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphic/objects/blueheart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/ItemPlacer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Object/OBJ_Key.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Object/SuperObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphic/player/heart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphic/player/heart_blank.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Characters/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Characters/Health.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Characters/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/logo1.webp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Core/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Core/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tiles/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/TileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,24 +41,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/fstup/IdeaProjects/LoliesOnSteroids&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/fstup/Desktop/zakladAdventuryIDEA 2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,7 +87,12 @@
       <workItem from="1717231807436" duration="3280000" />
       <workItem from="1717338437570" duration="2626000" />
       <workItem from="1717355672119" duration="6382000" />
-      <workItem from="1717402336146" duration="3108000" />
+      <workItem from="1717402336146" duration="3136000" />
+      <workItem from="1717430205598" duration="25000" />
+      <workItem from="1717442215964" duration="112000" />
+      <workItem from="1717491187109" duration="1009000" />
+      <workItem from="1717492208271" duration="623000" />
+      <workItem from="1717505418468" duration="2537000" />
     </task>
     <task id="LOCAL-00001" summary="Filip je noob">
       <option name="closed" value="true" />
@@ -180,7 +182,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717360150362</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Setting up the game loop">
+      <option name="closed" value="true" />
+      <created>1717412432609</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1717412432609</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
