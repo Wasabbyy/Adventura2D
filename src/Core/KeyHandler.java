@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
     public boolean downPressed;
     public boolean rightPressed;
     public boolean leftPressed;
+    public boolean  inventoryPressed;
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
@@ -31,6 +32,9 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_D:
                 rightPressed = true;
+                break;
+            case KeyEvent.VK_I:
+                inventoryPressed = true;
                 break;
             default:
                 // Handle other keys if necessary
@@ -58,6 +62,10 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D){
             rightPressed=false;
+        }
+        if(code == KeyEvent.VK_I){
+            inventoryPressed =false;
+
         }
 
     }

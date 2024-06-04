@@ -9,10 +9,10 @@ public class DangerousCollision extends Collision{
 
     @Override
     public void checkTile(Character character) {
-            int characterLeftWorldX = character.worldX + character.soidArea.x;
-            int characterRightWorldX = characterLeftWorldX + character.soidArea.width;
-            int characterUpWorldY = character.worldY + character.soidArea.y;
-            int characterDownWorldY = characterUpWorldY + character.soidArea.height;
+            int characterLeftWorldX = character.worldX + character.solidArea.x;
+            int characterRightWorldX = characterLeftWorldX + character.solidArea.width;
+            int characterUpWorldY = character.worldY + character.solidArea.y;
+            int characterDownWorldY = characterUpWorldY + character.solidArea.height;
 
             int characterLeftCol = characterLeftWorldX / gamePanel.tileSize;
             int characterRightCol = characterRightWorldX / gamePanel.tileSize;

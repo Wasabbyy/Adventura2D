@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class Player extends Character {
 
+    int hasKey=0;
+    public Inventory inventory;
     private final GamePanel gamePanel;
     private final KeyHandler keyH;
     public int screenX;
@@ -19,14 +21,15 @@ public class Player extends Character {
     private long lastDamageTime; // Variable to track the last damage time
     private static final long DAMAGE_DELAY = 500; // 0.5 second delay in milliseconds
 
-    public Player(GamePanel gamePanel, KeyHandler keyH) {
+    public Player(GamePanel gamePanel, KeyHandler keyH,Inventory inventory) {
+        this.inventory = inventory != null ? inventory : new Inventory();
         this.gamePanel = gamePanel;
         this.keyH = keyH;
 
         screenX = gamePanel.ScreenWidth / 2 - gamePanel.tileSize / 2;
         screenY = gamePanel.ScreenHeight / 2 - gamePanel.tileSize / 2;
 
-        soidArea = new Rectangle(8, 16, 32, 32);
+        solidArea = new Rectangle(8, 16, 32, 32);
 
         setDefaultValues();
         getPlayerImage();
@@ -38,6 +41,10 @@ public class Player extends Character {
         speed = 4;
         direction = "up";
         hearth = 6;
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDeafultX = 8;
+        solidAreaDeafultY = 16;
         lastDamageTime = System.currentTimeMillis(); // Initialize the damage time
     }
 
@@ -50,11 +57,14 @@ public class Player extends Character {
             if (keyH.downPressed) direction = "down";
             if (keyH.leftPressed) direction = "left";
             if (keyH.rightPressed) direction = "right";
+            if (keyH.inventoryPressed) direction = "inventory";
 
             collisionOn = false;
             dangerousCollisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
             gamePanel.dangerousCollision.checkTile(this);
+            int objIndex= gamePanel.collisionChecker.checkObject(this,true);
+            pickUp(objIndex);
             lavaDamage();
 
             if (!collisionOn) {
@@ -70,6 +80,9 @@ public class Player extends Character {
                         break;
                     case "right":
                         dx = 1;
+                        break;
+                    case "inventory":
+                        inventory.listOfItems();
                         break;
                 }
                 if (dx != 0 && dy != 0) {
@@ -151,5 +164,21 @@ public class Player extends Character {
             }
         }
 
+    }
+
+    public void pickUp(int i){
+        if (i !=999){
+            String objectName = gamePanel.obj[i].name;
+
+            switch (objectName){
+                case"Key":
+                    inventory.addItems("Key");
+                    hasKey++;
+                    gamePanel.obj[i]=null;
+                    System.out.println("Key:"+hasKey);
+                    inventory.listOfItems();
+                    break;
+            }
+        }
     }
 }

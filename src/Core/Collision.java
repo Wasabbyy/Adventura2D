@@ -6,15 +6,16 @@ public class Collision {
 
     GamePanel gamePanel;
 
+
     public Collision(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
     public void checkTile(Character character) {
-        int characterLeftWorldX = character.worldX + character.soidArea.x;
-        int characterRightWorldX = characterLeftWorldX + character.soidArea.width;
-        int characterUpWorldY = character.worldY + character.soidArea.y;
-        int characterDownWorldY = characterUpWorldY + character.soidArea.height;
+        int characterLeftWorldX = character.worldX + character.solidArea.x;
+        int characterRightWorldX = characterLeftWorldX + character.solidArea.width;
+        int characterUpWorldY = character.worldY + character.solidArea.y;
+        int characterDownWorldY = characterUpWorldY + character.solidArea.height;
 
         int characterLeftCol = characterLeftWorldX / gamePanel.tileSize;
         int characterRightCol = characterRightWorldX / gamePanel.tileSize;
@@ -57,5 +58,75 @@ public class Collision {
                 }
                 break;
         }
+    }
+    public int checkObject(Character character, boolean player){
+        int index = 999;
+
+        for (int i = 0; i < gamePanel.obj.length; i++){
+            if(gamePanel.obj[i] != null) {
+                character.solidArea.x = character.worldX + character.solidAreaDeafultX;
+                character.solidArea.y = character.worldY + character.solidAreaDeafultY;
+
+                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].worldX + gamePanel.obj[i].solidAreaDefaultX;
+                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].worldY + gamePanel.obj[i].solidAreaDefaultY;
+
+                switch (character.direction){
+                    case "up":
+                        character.solidArea.y -= character.speed;
+                        if(character.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                        if ( gamePanel.obj[i].collision){
+                            character.collisionOn=true;
+                        }
+                        if(player){
+                            index=i;
+                        }
+                        }
+                        break;
+                    case "down":
+                        character.solidArea.y += character.speed;
+                        if(character.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            if ( gamePanel.obj[i].collision){
+                                character.collisionOn=true;
+                            }
+                            if(player){
+                                index=i;
+                            }
+
+                        }
+                        break;
+                    case "left":
+                        character.solidArea.x -= character.speed;
+                        if(character.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            if ( gamePanel.obj[i].collision){
+                                character.collisionOn=true;
+                            }
+                            if(player){
+                                index=i;
+                            }
+
+                        }
+                        break;
+                    case "right":
+                        character.solidArea.x += character.speed;
+                        if(character.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            if ( gamePanel.obj[i].collision){
+                                character.collisionOn=true;
+                            }
+                            if(player){
+                                index=i;
+                            }
+
+                        }
+                        break;
+                }
+
+                // Reset the coordinates to their default values
+                character.solidArea.x = character.solidAreaDeafultX;
+                character.solidArea.y = character.solidAreaDeafultY;
+                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].solidAreaDefaultX;
+                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].solidAreaDefaultY;
+            }
+        }
+        return index;
     }
 }

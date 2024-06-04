@@ -1,7 +1,7 @@
 package Core;
 
+import Characters.Inventory;
 import Characters.Player;
-import Tiles.Tile;
 import Tiles.TileManager;
 import Object.SuperObject;
 
@@ -28,15 +28,18 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldWidth = maxWorldCol * tileSize;
     public final int worldHeight = maxWorldRow * tileSize;
 
+
+
     BufferedImage endScreen;
 
     Thread gameThread;
+    Inventory inventory;
 
     KeyHandler keyH = new KeyHandler();
     public Collision collisionChecker = new Collision(this);
     public DangerousCollision dangerousCollision = new DangerousCollision(this);
 
-    public Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH,inventory);
     public TileManager tileManager = new TileManager(this);
     public ItemPlacer itemPlacer = new ItemPlacer(this);
 
