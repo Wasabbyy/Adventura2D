@@ -3,15 +3,12 @@ package Characters;
 import Core.GamePanel;
 import Core.KeyHandler;
 
-import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Player extends Character {
-
 
     public Inventory inventory;
     private long lastInventoryTime; // Variable to track the last time inventory was shown
@@ -19,13 +16,14 @@ public class Player extends Character {
 
     private final GamePanel gamePanel;
     private final KeyHandler keyH;
+    boolean drawInventory = false;
     public int screenX;
     public int screenY;
     private long lastDamageTime; // Variable to track the last damage time
     private static final long DAMAGE_DELAY = 500; // 0.5 second delay in milliseconds
 
-    public Player(GamePanel gamePanel, KeyHandler keyH,Inventory inventory) {
-        this.inventory = inventory != null ? inventory : new Inventory();
+    public Player(GamePanel gamePanel, KeyHandler keyH, Inventory inventory) {
+        this.inventory = inventory != null ? inventory : new Inventory(gamePanel, this);
         this.gamePanel = gamePanel;
         this.keyH = keyH;
 
@@ -55,14 +53,18 @@ public class Player extends Character {
         long currentTime = System.currentTimeMillis();
         boolean inventoryPressedWithCooldown = keyH.inventoryPressed && (currentTime - lastInventoryTime >= INVENTORY_COOLDOWN);
 
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || inventoryPressedWithCooldown) {
+        if (inventoryPressedWithCooldown) {
+            drawInventory = !drawInventory; // Toggle the inventory display
+            lastInventoryTime = currentTime; // Update the last inventory time
+        }
+
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             int dx = 0, dy = 0;
 
             if (keyH.upPressed) direction = "up";
             if (keyH.downPressed) direction = "down";
             if (keyH.leftPressed) direction = "left";
             if (keyH.rightPressed) direction = "right";
-            if (inventoryPressedWithCooldown) direction = "inventory";
 
             collisionOn = false;
             dangerousCollisionOn = false;
@@ -71,7 +73,6 @@ public class Player extends Character {
             int objIndex = gamePanel.collisionChecker.checkObject(this, true);
             pickUp(objIndex);
             lavaDamage();
-
 
             if (!collisionOn) {
                 switch (direction) {
@@ -86,11 +87,6 @@ public class Player extends Character {
                         break;
                     case "right":
                         dx = 1;
-                        break;
-                    case "inventory":
-                        inventory.listOfItems();
-                        lastInventoryTime = currentTime; // Update the last inventory time
-                        direction="down";
                         break;
                 }
                 if (dx != 0 && dy != 0) {
@@ -109,7 +105,6 @@ public class Player extends Character {
             }
         }
     }
-
 
     private void getPlayerImage() {
         try {
@@ -141,6 +136,10 @@ public class Player extends Character {
 
         g2.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
         drawHearth(g2);
+
+        if (drawInventory) {
+            inventory.drawInventory(g2);
+        }
     }
 
     public void lavaDamage() {
@@ -155,34 +154,30 @@ public class Player extends Character {
             lastDamageTime = currentTime;
         }
     }
-    public void drawHearth(Graphics2D g2){
 
-        for (int i=0; i<hearth; i++){
-            if (hearth % 2 == 1){
-                if (i+1 == hearth) {
+    public void drawHearth(Graphics2D g2) {
+        for (int i = 0; i < hearth; i++) {
+            if (hearth % 2 == 1) {
+                if (i + 1 == hearth) {
                     g2.drawImage(healthHalf, i / 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-                }
-                else {
+                } else {
                     g2.drawImage(health, i / 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
                 }
-
-            }
-            else {
-                g2.drawImage(health, i/2 * gamePanel.tileSize,0, gamePanel.tileSize, gamePanel.tileSize, null);
+            } else {
+                g2.drawImage(health, i / 2 * gamePanel.tileSize, 0, gamePanel.tileSize, gamePanel.tileSize, null);
                 i++;
             }
         }
-
     }
 
-    public void pickUp(int i){
-        if (i !=999){
+    public void pickUp(int i) {
+        if (i != 999) {
             String objectName = gamePanel.obj[i].name;
 
-            switch (objectName){
-                case"Key":
+            switch (objectName) {
+                case "Key":
                     inventory.addItems("Key");
-                    gamePanel.obj[i]=null;
+                    gamePanel.obj[i] = null;
                     break;
             }
         }
