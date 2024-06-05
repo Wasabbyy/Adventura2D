@@ -175,8 +175,8 @@ public class Player extends Character {
             String objectName = gamePanel.obj[i].name;
 
             switch (objectName) {
-                case "Key":
-                    inventory.addItems("Key");
+                case "Firerock":
+                    inventory.addItems("Firerock");
                     gamePanel.obj[i] = null;
                     break;
             }

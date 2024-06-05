@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="Setting up the game loop">
-      <change afterPath="$PROJECT_DIR$/graphic/player/Inventory.png" afterDir="false" />
+    <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="Inventory feature">
+      <change afterPath="$PROJECT_DIR$/graphic/objects/firerock.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/map/worldmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/map/worldmap.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/objects/blueheart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/Inventory.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/Inventory.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_down1.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_down1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_down2.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_down2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_left1.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_left1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_left2.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_left2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_right1.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_right1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_right2.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_right2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_up1.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_up1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphic/player/player_up2.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphic/player/player_up2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Characters/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Characters/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object/OBJ_Key.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object/OBJ_Key.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +101,13 @@
       <workItem from="1717492208271" duration="623000" />
       <workItem from="1717505418468" duration="3036000" />
       <workItem from="1717530619848" duration="4814000" />
-      <workItem from="1717585815403" duration="4370000" />
+      <workItem from="1717585815403" duration="4455000" />
+      <workItem from="1717593098127" duration="261000" />
+      <workItem from="1717594871299" duration="3000" />
+      <workItem from="1717605435084" duration="249000" />
+      <workItem from="1717608162061" duration="54000" />
+      <workItem from="1717608263092" duration="67000" />
+      <workItem from="1717613443579" duration="3043000" />
     </task>
     <task id="LOCAL-00001" summary="Filip je noob">
       <option name="closed" value="true" />
@@ -211,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717535438854</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Inventory feature">
+      <option name="closed" value="true" />
+      <created>1717592509665</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1717592509665</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +247,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Filip je noob" />
     <MESSAGE value="Setting up the game loop" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting up the game loop" />
+    <MESSAGE value="Inventory feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inventory feature" />
   </component>
 </project>
