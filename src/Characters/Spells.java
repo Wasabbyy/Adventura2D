@@ -26,7 +26,7 @@ public class Spells {
 
     private void loadSpell() {
         try {
-            frostbolt = ImageIO.read(getClass().getResourceAsStream("/objects/firerock.png"));
+            frostbolt = ImageIO.read(getClass().getResourceAsStream("/player/frostbolt.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
