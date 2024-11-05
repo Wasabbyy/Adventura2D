@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcdddc0a-3edf-4653-9ca0-30ccfef376a3" name="Changes" comment="First start">
-      <change afterPath="$PROJECT_DIR$/graphic/player/frostbolt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Core/SpellCollision.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Characters/Spells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Characters/Spells.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +95,7 @@
       <workItem from="1726824256919" duration="4000" />
       <workItem from="1727796614418" duration="602000" />
       <workItem from="1729782859540" duration="604000" />
-      <workItem from="1730795550123" duration="5438000" />
+      <workItem from="1730795550123" duration="6291000" />
     </task>
     <task id="LOCAL-00001" summary="Filip je noob">
       <option name="closed" value="true" />
@@ -242,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730801252903</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="First start">
+      <option name="closed" value="true" />
+      <created>1730808532849</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1730808532849</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
