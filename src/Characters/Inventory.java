@@ -45,7 +45,6 @@ public class Inventory {
 
     public void loadItemImages() {
         loadItemImage("Firerock", "/objects/firerock.png");
-        // Add more items here as needed
     }
 
     private void loadItemImage(String itemName, String path) {

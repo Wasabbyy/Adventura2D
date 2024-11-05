@@ -11,6 +11,7 @@ import java.io.IOException;
 public class Player extends Character {
 
     public Inventory inventory;
+    public Spells spells;
     private long lastInventoryTime; // Variable to track the last time inventory was shown
     private static final long INVENTORY_COOLDOWN = 500; // 0.5 second cooldown in milliseconds
 
@@ -22,8 +23,9 @@ public class Player extends Character {
     private long lastDamageTime; // Variable to track the last damage time
     private static final long DAMAGE_DELAY = 500; // 0.5 second delay in milliseconds
 
-    public Player(GamePanel gamePanel, KeyHandler keyH, Inventory inventory) {
+    public Player(GamePanel gamePanel, KeyHandler keyH, Inventory inventory,Spells spells) {
         this.inventory = inventory != null ? inventory : new Inventory(gamePanel, this);
+        this.spells=new Spells(gamePanel,this);
         this.gamePanel = gamePanel;
         this.keyH = keyH;
 
@@ -53,6 +55,13 @@ public class Player extends Character {
         long currentTime = System.currentTimeMillis();
         boolean inventoryPressedWithCooldown = keyH.inventoryPressed && (currentTime - lastInventoryTime >= INVENTORY_COOLDOWN);
 
+        if (keyH.castPressed && !spells.active) {
+            spells.castSpell(); // Cast the spell when the cast key is pressed and spell is inactive
+            keyH.castPressed=false;
+        }
+
+        spells.updateSpell(); // Update the spell's position each frame
+
         if (inventoryPressedWithCooldown) {
             drawInventory = !drawInventory; // Toggle the inventory display
             lastInventoryTime = currentTime; // Update the last inventory time
@@ -76,18 +85,10 @@ public class Player extends Character {
 
             if (!collisionOn) {
                 switch (direction) {
-                    case "up":
-                        dy = -1;
-                        break;
-                    case "down":
-                        dy = 1;
-                        break;
-                    case "left":
-                        dx = -1;
-                        break;
-                    case "right":
-                        dx = 1;
-                        break;
+                    case "up" -> dy = -1;
+                    case "down" -> dy = 1;
+                    case "left" -> dx = -1;
+                    case "right" -> dx = 1;
                 }
                 if (dx != 0 && dy != 0) {
                     dx *= Math.sqrt(2) / 2;
@@ -140,6 +141,8 @@ public class Player extends Character {
         if (drawInventory) {
             inventory.drawInventory(g2);
         }
+
+        spells.drawSpell(g2); // Draw the spell if active
     }
 
     public void lavaDamage() {

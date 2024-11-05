@@ -10,6 +10,7 @@ public class KeyHandler implements KeyListener {
     public boolean rightPressed;
     public boolean leftPressed;
     public boolean  inventoryPressed;
+    public boolean castPressed;
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
@@ -36,8 +37,8 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_I:
                 inventoryPressed = true;
                 break;
-            default:
-                // Handle other keys if necessary
+            case KeyEvent.VK_P:
+                castPressed = true;
                 break;
         }
     }

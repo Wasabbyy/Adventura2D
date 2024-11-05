@@ -2,6 +2,7 @@ package Core;
 
 import Characters.Inventory;
 import Characters.Player;
+import Characters.Spells;
 import Tiles.TileManager;
 import Object.SuperObject;
 
@@ -34,12 +35,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
     Inventory inventory;
+    Spells spells;
 
     KeyHandler keyH = new KeyHandler();
     public Collision collisionChecker = new Collision(this);
     public DangerousCollision dangerousCollision = new DangerousCollision(this);
 
-    public Player player = new Player(this, keyH,inventory);
+    public Player player = new Player(this, keyH,inventory,spells);
     public TileManager tileManager = new TileManager(this);
     public ItemPlacer itemPlacer = new ItemPlacer(this);
 
